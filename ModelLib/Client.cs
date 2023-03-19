@@ -2,7 +2,7 @@
 
 namespace ModelLib
 {
-    class Client
+    public class Client
     {
         //constante
         private const char FILE_SEPARATOR = ';';
@@ -50,7 +50,7 @@ namespace ModelLib
             return info;
         }
 
-        public string ConversieLaSir_PentruFisier()
+        public string ConvertStringForFile()
         {
             string obiectStudentPentruFisier = string.Format("{1}{0}{2}{0}{3}{0}",
                 FILE_SEPARATOR,
