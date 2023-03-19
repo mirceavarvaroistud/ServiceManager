@@ -49,5 +49,19 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataAccessCar\DataAccessCar.csproj">
+      <Project>{8b402af9-2907-4561-9b71-5131e79e2a2a}</Project>
+      <Name>DataAccessCar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessClient\DataAccessClient.csproj">
+      <Project>{84fb8dc8-4875-484a-a195-aa18c41bfe8a}</Project>
+      <Name>DataAccessClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ModelLib\ModelLib.csproj">
+      <Project>{5f263271-f42e-4ffe-8180-600fd1bea60e}</Project>
+      <Name>ModelLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
