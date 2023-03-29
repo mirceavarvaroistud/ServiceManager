@@ -47,5 +47,39 @@ namespace DataAccessClient
 
             return clients;
         }
+
+        public Client GetClient(string name, string surname, int idclient)
+        {
+            int carclientsnb = 0;
+            Client[] clients = this.GetClients(out carclientsnb);
+            int i = 0;
+
+            for (i = 0; i < carclientsnb; i++)
+            {
+                if (!string.IsNullOrEmpty(name))
+                {
+                    if(string.Equals(name, clients[i].GetName()))
+                    {
+                        return clients[i];
+                    }
+                }
+                else if(!string.IsNullOrEmpty(surname))
+                {
+                    if (string.Equals(surname, clients[i].GetSurname()))
+                    {
+                        return clients[i];
+                    }
+                }
+                else if(idclient!=0)
+                {
+                    if(idclient == clients[i].GetIdClient())
+                    {
+                        return clients[i];
+                    }
+                }
+            }
+
+            return clients[i-1];
+        }
     }
 }

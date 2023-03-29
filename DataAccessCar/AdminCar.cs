@@ -47,5 +47,39 @@ namespace DataAccessCar
 
             return cars;
         }
+
+        public Car GetCar(string mark, string model, int idcar)
+        {
+            int carclientsnb = 0;
+            Car[] cars = this.GetCars(out carclientsnb);
+            int i = 0;
+
+            for (i = 0; i < carclientsnb; i++)
+            {
+                if (!string.IsNullOrEmpty(mark))
+                {
+                    if (string.Equals(mark, cars[i].GetMark()))
+                    {
+                        return cars[i];
+                    }
+                }
+                else if (!string.IsNullOrEmpty(model))
+                {
+                    if (string.Equals(model, cars[i].GetModel()))
+                    {
+                        return cars[i];
+                    }
+                }
+                else if (idcar != 0)
+                {
+                    if (idcar == cars[i].GetIdCar())
+                    {
+                        return cars[i];
+                    }
+                }
+            }
+
+            return cars[i];
+        }
     }
 }

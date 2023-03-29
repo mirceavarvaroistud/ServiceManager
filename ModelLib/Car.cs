@@ -10,10 +10,12 @@ namespace ModelLib
         private const int ID = 0;
         private const int MARK = 1;
         private const int MODEL = 2;
+        private const int ODO = 3;
 
         private int idCar; //identificator unic student
         private string mark;
         private string model;
+        private int[] lastodometer;
 
         //contructor implicit
         public Car()
@@ -22,11 +24,13 @@ namespace ModelLib
         }
 
         //constructor cu parametri
-        public Car(int idStudent, string mark, string model)
+        public Car(int idCar, string mark, string model, string odostr)
         {
-            this.idCar = idStudent;
+            this.idCar = idCar;
             this.mark = mark;
             this.model = model;
+            string[] lastodometerstr = odostr.Split(' ');
+            this.lastodometer = Array.ConvertAll<string, int>(lastodometerstr, int.Parse);
         }
 
         //constructor cu un singur parametru de tip string care reprezinta o linie dintr-un fisier text
@@ -38,11 +42,14 @@ namespace ModelLib
             idCar = Convert.ToInt32(dateFisier[ID]);
             mark = dateFisier[MARK];
             model = dateFisier[MODEL];
+            string fileodometer = dateFisier[ODO];
+            string[] fileodometerstrtb = fileodometer.Split(' ');
+            this.lastodometer = Array.ConvertAll<string, int>(fileodometerstrtb, int.Parse);
         }
 
         public string Info()
         {
-            string info = string.Format("Id:{0} Nume:{1} Prenume: {2}",
+            string info = string.Format("Id:{0} Mark:{1} Model: {2} ",
                 idCar.ToString(),
                 (mark ?? " N/A "),
                 (model ?? " N/A "));
@@ -52,11 +59,13 @@ namespace ModelLib
 
         public string ConvertStringForFile()
         {
-            string obiectStudentPentruFisier = string.Format("{1}{0}{2}{0}{3}{0}",
+            string[] odostr = Array.ConvertAll<int, string>(lastodometer, ele => ele.ToString());
+            string obiectStudentPentruFisier = string.Format("{1}{0}{2}{0}{3}{0}{4}{0}",
                 FILE_SEPARATOR,
                 idCar.ToString(),
                 (mark ?? " N/A "),
-                (model ?? " N/A "));
+                (model ?? " N/A "),
+                (string.Join(" ", odostr) ?? " N/A "));
 
             return obiectStudentPentruFisier;
         }
@@ -74,6 +83,17 @@ namespace ModelLib
         public string GetModel()
         {
             return model;
+        }
+
+        public void SetLastOdoValue(string lastodovaluestr)
+        {
+            string[] fileodometerstrtb = lastodovaluestr.Split(' ');
+            this.lastodometer = Array.ConvertAll<string, int>(fileodometerstrtb, int.Parse);
+        }
+
+        public int[] GetLastOdoValue()
+        {
+            return lastodometer;
         }
     }
 }
