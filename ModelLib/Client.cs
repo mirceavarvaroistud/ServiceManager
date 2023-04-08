@@ -11,9 +11,9 @@ namespace ModelLib
         private const int NAME = 1;
         private const int SURNAME = 2;
 
-        private int idClient; //identificator unic student
-        private string name;
-        private string surname;
+        public int idClient { get; set; }
+        public string name { get; set; }
+        public string surname { get; set; }
 
         //contructor implicit
         public Client()
@@ -22,11 +22,11 @@ namespace ModelLib
         }
 
         //constructor cu parametri
-        public Client(int idClient, string name, string surname)
+        public Client(int localidClient, string localname, string localsurname)
         {
-            this.idClient = idClient;
-            this.name = name;
-            this.surname = surname;
+            idClient = localidClient;
+            name = localname;
+            surname = localsurname;
         }
 
         //constructor cu un singur parametru de tip string care reprezinta o linie dintr-un fisier text
@@ -59,21 +59,6 @@ namespace ModelLib
                 (surname ?? " N/A "));
 
             return obiectStudentPentruFisier;
-        }
-
-        public int GetIdClient()
-        {
-            return idClient;
-        }
-
-        public string GetName()
-        {
-            return name;
-        }
-
-        public string GetSurname()
-        {
-            return surname;
         }
     }
 }

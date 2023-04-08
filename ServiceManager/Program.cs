@@ -107,9 +107,9 @@ namespace ServiceManager
                                         else
                                         {
                                             client3 = adminClient.GetClient(name3, surname3, Id3);
-                                            if (string.Equals(surname3, client3.GetSurname()))
+                                            if (string.Equals(surname3, client3.surname))
                                             {
-                                                car3 = adminCar.GetCar(mark3, model3, client3.GetIdClient());
+                                                car3 = adminCar.GetCar(mark3, model3, client3.idClient);
                                                 entryFound = true;
                                             }
                                         }
@@ -117,9 +117,9 @@ namespace ServiceManager
                                     else
                                     {
                                         client3 = adminClient.GetClient(name3, surname3, Id3);
-                                        if (string.Equals(name3, client3.GetName()))
+                                        if (string.Equals(name3, client3.name))
                                         {
-                                            car3 = adminCar.GetCar(mark3, model3, client3.GetIdClient());
+                                            car3 = adminCar.GetCar(mark3, model3, client3.idClient);
                                             entryFound = true;
                                         }
                                     }
@@ -127,7 +127,7 @@ namespace ServiceManager
                                 else
                                 {
                                     car3 = adminCar.GetCar(mark3, model3, Id3);
-                                    if (string.Equals(model3, car3.GetModel()))
+                                    if (string.Equals(model3, car3.model))
                                     {
                                         client3 = adminClient.GetClient(name3, surname3, Id3);
                                         entryFound = true;
@@ -137,7 +137,7 @@ namespace ServiceManager
                             else
                             {
                                 car3 = adminCar.GetCar(mark3, model3, Id3);
-                                if (string.Equals(mark3, car3.GetMark()))
+                                if (string.Equals(mark3, car3.mark))
                                 {
                                     client3 = adminClient.GetClient(name3, surname3, Id3);
                                     entryFound = true;
@@ -147,7 +147,7 @@ namespace ServiceManager
                         else
                         {
                             car3 = adminCar.GetCar(mark3, model3, Id3);
-                            if (Id3 == car3.GetIdCar())
+                            if (Id3 == car3.idCar)
                             {
                                 client3 = adminClient.GetClient(name3, surname3, Id3);
                                 entryFound = true;
@@ -156,13 +156,13 @@ namespace ServiceManager
 
                         if (entryFound == true)
                         {
-                            string[] odostr = Array.ConvertAll<int, string>(car3.GetLastOdoValue(), ele => ele.ToString());
+                            string[] odostr = Array.ConvertAll<int, string>(car3.lastodometer, ele => ele.ToString());
                             string customerInfo = string.Format("Client with Id #{0} is: {1} {2} and has the car {3} {4} and has had checks at {5}",
-                                client3.GetIdClient(),
-                                client3.GetName() ?? " N/A ",
-                                client3.GetSurname() ?? " N/A ",
-                                car3.GetMark() ?? " N/A ",
-                                car3.GetModel() ?? " N/A ",
+                                client3.idClient,
+                                client3.name ?? " N/A ",
+                                client3.surname ?? " N/A ",
+                                car3.mark ?? " N/A ",
+                                car3.model ?? " N/A ",
                                 (string.Join(" ", odostr) ?? " N/A "));
 
                             Console.WriteLine(customerInfo);
@@ -193,11 +193,11 @@ namespace ServiceManager
             Console.WriteLine("Cars are: ");
             for (int i = 0; i < carsnb; i++)
             {
-                string[] odostr = Array.ConvertAll<int, string>(cars[i].GetLastOdoValue(), ele => ele.ToString());
+                string[] odostr = Array.ConvertAll<int, string>(cars[i].lastodometer, ele => ele.ToString());
                 string infoCar = string.Format("Car with id #{0} is: {1} {2} and has had checks at: {3}",
-                   cars[i].GetIdCar(),
-                   cars[i].GetMark() ?? " N/A ",
-                   cars[i].GetModel() ?? " N/A ",
+                   cars[i].idCar,
+                   cars[i].mark ?? " N/A ",
+                   cars[i].model ?? " N/A ",
                    (string.Join(" ", odostr) ?? " N/A "));
 
                 Console.WriteLine(infoCar);
@@ -210,9 +210,9 @@ namespace ServiceManager
             for (int i = 0; i < clientsnb; i++)
             {
                 string infoClient = string.Format("Client with id #{0} is: {1} {2}",
-                   clients[i].GetIdClient(),
-                   clients[i].GetName() ?? " N/A ",
-                   clients[i].GetSurname() ?? " N/A ");
+                   clients[i].idClient,
+                   clients[i].name ?? " N/A ",
+                   clients[i].surname ?? " N/A ");
 
                 Console.WriteLine(infoClient);
             }

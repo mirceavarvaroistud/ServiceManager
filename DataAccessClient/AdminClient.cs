@@ -58,21 +58,21 @@ namespace DataAccessClient
             {
                 if (!string.IsNullOrEmpty(name))
                 {
-                    if(string.Equals(name, clients[i].GetName()))
+                    if(string.Equals(name, clients[i].name))
                     {
                         return clients[i];
                     }
                 }
                 else if(!string.IsNullOrEmpty(surname))
                 {
-                    if (string.Equals(surname, clients[i].GetSurname()))
+                    if (string.Equals(surname, clients[i].surname))
                     {
                         return clients[i];
                     }
                 }
                 else if(idclient!=0)
                 {
-                    if(idclient == clients[i].GetIdClient())
+                    if(idclient == clients[i].idClient)
                     {
                         return clients[i];
                     }

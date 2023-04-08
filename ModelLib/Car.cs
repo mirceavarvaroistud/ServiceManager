@@ -12,10 +12,10 @@ namespace ModelLib
         private const int MODEL = 2;
         private const int ODO = 3;
 
-        private int idCar; //identificator unic student
-        private string mark;
-        private string model;
-        private int[] lastodometer;
+        public int idCar { get; set; }
+        public string mark { get; set; }
+        public string model { get; set; }
+        public int[] lastodometer { get; set; }
 
         //contructor implicit
         public Car()
@@ -24,13 +24,13 @@ namespace ModelLib
         }
 
         //constructor cu parametri
-        public Car(int idCar, string mark, string model, string odostr)
+        public Car(int localidCar, string localMark, string localModel, string localOdostr)
         {
-            this.idCar = idCar;
-            this.mark = mark;
-            this.model = model;
-            string[] lastodometerstr = odostr.Split(' ');
-            this.lastodometer = Array.ConvertAll<string, int>(lastodometerstr, int.Parse);
+            idCar = localidCar;
+            mark = localMark;
+            model = localModel;
+            string[] lastodometerstr = localOdostr.Split(' ');
+            lastodometer = Array.ConvertAll<string, int>(lastodometerstr, int.Parse);
         }
 
         //constructor cu un singur parametru de tip string care reprezinta o linie dintr-un fisier text
@@ -70,30 +70,10 @@ namespace ModelLib
             return obiectStudentPentruFisier;
         }
 
-        public int GetIdCar()
-        {
-            return idCar;
-        }
-
-        public string GetMark()
-        {
-            return mark;
-        }
-
-        public string GetModel()
-        {
-            return model;
-        }
-
         public void SetLastOdoValue(string lastodovaluestr)
         {
             string[] fileodometerstrtb = lastodovaluestr.Split(' ');
-            this.lastodometer = Array.ConvertAll<string, int>(fileodometerstrtb, int.Parse);
-        }
-
-        public int[] GetLastOdoValue()
-        {
-            return lastodometer;
+            lastodometer = Array.ConvertAll<string, int>(fileodometerstrtb, int.Parse);
         }
     }
 }

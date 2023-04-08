@@ -58,21 +58,21 @@ namespace DataAccessCar
             {
                 if (!string.IsNullOrEmpty(mark))
                 {
-                    if (string.Equals(mark, cars[i].GetMark()))
+                    if (string.Equals(mark, cars[i].mark))
                     {
                         return cars[i];
                     }
                 }
                 else if (!string.IsNullOrEmpty(model))
                 {
-                    if (string.Equals(model, cars[i].GetModel()))
+                    if (string.Equals(model, cars[i].model))
                     {
                         return cars[i];
                     }
                 }
                 else if (idcar != 0)
                 {
-                    if (idcar == cars[i].GetIdCar())
+                    if (idcar == cars[i].idCar)
                     {
                         return cars[i];
                     }
