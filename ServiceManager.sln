@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.33423.256
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceManager", "ServiceManager\ServiceManager.csproj", "{8B39386A-C88D-400A-99B7-216A120EF724}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessClient", "DataAccessClient\DataAccessClient.csproj", "{84FB8DC8-4875-484A-A195-AA18C41BFE8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLib", "ModelLib\ModelLib.csproj", "{5F263271-F42E-4FFE-8180-600FD1BEA60E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIServiceManager", "UIServiceManager\UIServiceManager.csproj", "{A8D7C246-03EA-4617-97AA-B297FB72499C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5F263271-F42E-4FFE-8180-600FD1BEA60E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F263271-F42E-4FFE-8180-600FD1BEA60E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F263271-F42E-4FFE-8180-600FD1BEA60E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8D7C246-03EA-4617-97AA-B297FB72499C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8D7C246-03EA-4617-97AA-B297FB72499C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8D7C246-03EA-4617-97AA-B297FB72499C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8D7C246-03EA-4617-97AA-B297FB72499C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
