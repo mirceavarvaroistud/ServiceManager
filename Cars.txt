@@ -3,3 +3,4 @@
 3;Dacia;Logan;10000 20000 30000;
 4;Mercedes;S500;1000 5000 15000;
 5;Tesla;ModelS;10000 60000 120000;
+6;Renault;Zoe;40000;
