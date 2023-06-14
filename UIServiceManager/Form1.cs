@@ -22,6 +22,16 @@ namespace UIServiceManager
         private const int LATIME_CONTROL = 100;
         private const int DIMENSIUNE_PAS_Y = 30;
         private const int DIMENSIUNE_PAS_X = 150;
+        Label[] lblIds;
+        Label[] lblNames;
+        Label[] lblSurnames;
+        Label[] lblMarks;
+        Label[] lblModels;
+        Label tempLblIds;
+        Label tempLblName;
+        Label tempLblSurname;
+        Label tempLblMark;
+        Label tempLblModel;
 
         public Form1()
         {
@@ -85,11 +95,11 @@ namespace UIServiceManager
 
         private void FormGetAndShowInfo(Client[] clients, Car[] cars, int nb)
         {
-            Label[] lblIds = new Label[nb];
-            Label[] lblNames = new Label[nb];
-            Label[] lblSurnames = new Label[nb];
-            Label[] lblMarks = new Label[nb];
-            Label[] lblModels = new Label[nb];
+            lblIds = new Label[nb];
+            lblNames = new Label[nb];
+            lblSurnames = new Label[nb];
+            lblMarks = new Label[nb];
+            lblModels = new Label[nb];
 
             for (int i = 0; i < nb; i++)
             {
@@ -135,24 +145,78 @@ namespace UIServiceManager
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void FormShowSingleInfo(Client client, Car car, int nb)
         {
+            tempLblIds = new Label();
+            tempLblIds.Width = LATIME_CONTROL;
+            tempLblIds.Text = client.idClient.ToString();
+            tempLblIds.Left = 3 * DIMENSIUNE_PAS_X;
+            tempLblIds.Top = 2 * DIMENSIUNE_PAS_Y;
+            tempLblIds.BackColor = Color.WhiteSmoke;
+            this.Controls.Add(tempLblIds);
 
+            tempLblName = new Label();
+            tempLblName.Width = LATIME_CONTROL;
+            tempLblName.Text = client.name;
+            tempLblName.Left = 4 * DIMENSIUNE_PAS_X;
+            tempLblName.Top = 2 * DIMENSIUNE_PAS_Y;
+            tempLblName.BackColor = Color.WhiteSmoke;
+            this.Controls.Add(tempLblName);
+
+            tempLblSurname = new Label();
+            tempLblSurname.Width = LATIME_CONTROL;
+            tempLblSurname.Text = client.surname;
+            tempLblSurname.Left = 5 * DIMENSIUNE_PAS_X;
+            tempLblSurname.Top = 2 * DIMENSIUNE_PAS_Y;
+            tempLblSurname.BackColor = Color.WhiteSmoke;
+            this.Controls.Add(tempLblSurname);
+
+            tempLblMark = new Label();
+            tempLblMark.Width = LATIME_CONTROL;
+            tempLblMark.Text = car.mark;
+            tempLblMark.Left = 6 * DIMENSIUNE_PAS_X;
+            tempLblMark.Top = 2 * DIMENSIUNE_PAS_Y;
+            tempLblMark.BackColor = Color.WhiteSmoke;
+            this.Controls.Add(tempLblMark);
+
+            tempLblModel = new Label();
+            tempLblModel.Width = LATIME_CONTROL;
+            tempLblModel.Text = car.model;
+            tempLblModel.Left = 7 * DIMENSIUNE_PAS_X;
+            tempLblModel.Top = 2 * DIMENSIUNE_PAS_Y;
+            tempLblModel.BackColor = Color.WhiteSmoke;
+            this.Controls.Add(tempLblModel);
         }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
+        private void removeCarClientInfo(int nb)
         {
+            for (int i = 0; i < nb; i++)
+            {
+                if (lblIds[i] != null)
+                {
+                    this.Controls.Remove(lblIds[i]);
+                }
 
-        }
+                if (lblNames[i] != null)
+                {
+                    this.Controls.Remove(lblNames[i]);
+                }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
+                if (lblSurnames[i] != null)
+                {
+                    this.Controls.Remove(lblSurnames[i]);
+                }
 
-        }
+                if (lblMarks[i] != null)
+                {
+                    this.Controls.Remove(lblMarks[i]);
+                }
 
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
+                if (lblModels[i] != null)
+                {
+                    this.Controls.Remove(lblModels[i]);
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -170,18 +234,20 @@ namespace UIServiceManager
             adminCar.GetCars(out entryNb);
             int Id = entryNb + 1;
 
-            car = new Car(Id, textBox4.Text, textBox2.Text, textBox9.Text);
-            client = new Client(Id, textBox1.Text, textBox3.Text);
+            car = new Car(Id, carMarkInput.Text, carModelInput.Text, OdometerInput.Text);
+            client = new Client(Id, nameInput.Text, surnameInput.Text);
 
             entryNb++;
             adminCar.AddCar(car);
             adminClient.AddClient(client);
 
-            textBox4.Text = string.Empty;
-            textBox2.Text = string.Empty;
-            textBox3.Text = string.Empty;
-            textBox1.Text = string.Empty;
-            textBox9.Text = string.Empty;
+            carMarkInput.Text = string.Empty;
+            carModelInput.Text = string.Empty;
+            surnameInput.Text = string.Empty;
+            nameInput.Text = string.Empty;
+            OdometerInput.Text = string.Empty;
+
+            removeCarClientInfo(entryNb);
 
             Client[] clients = adminClient.GetClients(out entryNb);
             Car[] cars = adminCar.GetCars(out entryNb);
@@ -214,10 +280,12 @@ namespace UIServiceManager
         private void button3_Click(object sender, EventArgs e)
         {
             int Id3 = 0;
-            string mark3 = textBox6.Text;
-            string model3 = textBox8.Text;
-            string name3 = textBox5.Text;
-            string surname3 = textBox7.Text;
+            string searchItem = textBox5.Text;
+            string searchSelector = searchSelect.Text;
+            string mark3 = string.Empty;
+            string model3 = string.Empty;
+            string name3 = string.Empty;
+            string surname3 = string.Empty;
             Client client3 = new Client(Id3, name3, surname3);
             Car car3 = new Car();
             bool entryFound = false;
@@ -228,27 +296,29 @@ namespace UIServiceManager
             string carFileFullPath = localSolutionFile + "\\" + carFileName;
             AdminClient adminClient = new AdminClient(clientFileFullPath);
             AdminCar adminCar = new AdminCar(carFileFullPath);
+            int entryNb = 0;
+            adminCar.GetCars(out entryNb);
+            int Id = entryNb + 1;
+
+            removeCarClientInfo(entryNb);
 
             Int32.TryParse(Console.ReadLine(), out Id3);
             if (Id3 == 0)
             {
-                if (string.IsNullOrEmpty(mark3))
+                if (!string.Equals(searchSelect.Text, "Mark") || string.IsNullOrEmpty(searchItem))
                 {
-                    if (string.IsNullOrEmpty(model3))
+                    if (!string.Equals(searchSelect.Text, "Model") || string.IsNullOrEmpty(searchItem))
                     {
-                        if (string.IsNullOrEmpty(name3))
+                        if (!string.Equals(searchSelect.Text, "Name") || string.IsNullOrEmpty(searchItem))
                         {
-                            if (string.IsNullOrEmpty(surname3))
+                            if (!string.Equals(searchSelect.Text, "Surname") || string.IsNullOrEmpty(searchItem))
                             {
-                                label6.BackColor = Color.Red;
-                                label8.BackColor = Color.Red;
-                                label7.BackColor = Color.Red;
-                                label9.BackColor = Color.Red;
+                                
                             }
                             else
                             {
-                                client3 = adminClient.GetClient(name3, surname3, Id3);
-                                if (string.Equals(surname3, client3.surname))
+                                client3 = adminClient.GetClient(name3, searchItem, Id3);
+                                if (string.Equals(searchItem, client3.surname))
                                 {
                                     car3 = adminCar.GetCar(mark3, model3, client3.idClient);
                                     entryFound = true;
@@ -257,8 +327,8 @@ namespace UIServiceManager
                         }
                         else
                         {
-                            client3 = adminClient.GetClient(name3, surname3, Id3);
-                            if (string.Equals(name3, client3.name))
+                            client3 = adminClient.GetClient(searchItem, surname3, Id3);
+                            if (string.Equals(searchItem, client3.name))
                             {
                                 car3 = adminCar.GetCar(mark3, model3, client3.idClient);
                                 entryFound = true;
@@ -267,8 +337,8 @@ namespace UIServiceManager
                     }
                     else
                     {
-                        car3 = adminCar.GetCar(mark3, model3, Id3);
-                        if (string.Equals(model3, car3.model))
+                        car3 = adminCar.GetCar(mark3, searchItem, Id3);
+                        if (string.Equals(searchItem, car3.model))
                         {
                             client3 = adminClient.GetClient(name3, surname3, Id3);
                             entryFound = true;
@@ -277,8 +347,8 @@ namespace UIServiceManager
                 }
                 else
                 {
-                    car3 = adminCar.GetCar(mark3, model3, Id3);
-                    if (string.Equals(mark3, car3.mark))
+                    car3 = adminCar.GetCar(searchItem, model3, Id3);
+                    if (string.Equals(searchItem, car3.mark))
                     {
                         client3 = adminClient.GetClient(name3, surname3, Id3);
                         entryFound = true;
@@ -306,11 +376,40 @@ namespace UIServiceManager
                     car3.model ?? " N/A ",
                     (string.Join(" ", odostr) ?? " N/A "));
 
-                label6.BackColor = Color.PaleGreen;
-                label8.BackColor = Color.PaleGreen;
-                label7.BackColor = Color.PaleGreen;
-                label9.BackColor = Color.PaleGreen;
+                FormShowSingleInfo(client3, car3, entryNb);
             }
+        }
+
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
